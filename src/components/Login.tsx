@@ -12,7 +12,7 @@ const Login: React.FC = () => {
 
     if (storedEmail && storedPassword) {
       if (email === storedEmail && password === storedPassword) {
-        window.location.href = './usuarios';
+        window.location.href = './usuarios.html';
       } else {
         alert('Preencha os campos corretamente');
       }
