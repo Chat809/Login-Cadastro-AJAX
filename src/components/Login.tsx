@@ -12,8 +12,7 @@ const Login: React.FC = () => {
 
     if (storedEmail && storedPassword) {
       if (email === storedEmail && password === storedPassword) {
-        // Redirecionar para a página usuarios.html após o login bem-sucedido
-        window.location.href = './usuarios.html';
+        window.location.href = './usuarios';
       } else {
         alert('Preencha os campos corretamente');
       }
