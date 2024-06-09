@@ -4,17 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuários</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: url('bg.jpg') no-repeat center center fixed;
-            color: white;
         }
         h1 {
             text-align: center;
@@ -26,17 +21,17 @@
             border-collapse: collapse;
         }
         th, td {
-            border: 3px solid white;
+            border: 1px solid #ddd;
             padding: 8px;
         }
         th {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: #f2f2f2;
             text-align: left;
         }
     </style>
 </head>
 <body>
-    <h1>Lista de Usuários/Integrantes da Equipe</h1>
+    <h1>Lista de Usuários</h1>
     <table>
         <thead>
             <tr>
@@ -51,25 +46,33 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded and parsed');
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'usuarios.json', true);
             xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var usuarios = JSON.parse(xhr.responseText);
-                    var tbody = document.getElementById('usuarios-tbody');
-                    usuarios.forEach(function(usuario) {
-                        var tr = document.createElement('tr');
-                        var tdId = document.createElement('td');
-                        tdId.textContent = usuario.id;
-                        var tdNome = document.createElement('td');
-                        tdNome.textContent = usuario.nome;
-                        var tdEmail = document.createElement('td');
-                        tdEmail.textContent = usuario.email;
-                        tr.appendChild(tdId);
-                        tr.appendChild(tdNome);
-                        tr.appendChild(tdEmail);
-                        tbody.appendChild(tr);
-                    });
+                if (xhr.readyState == 4) {
+                    console.log('Request finished and response is ready');
+                    if (xhr.status == 200) {
+                        console.log('Response received successfully');
+                        var usuarios = JSON.parse(xhr.responseText);
+                        console.log(usuarios);
+                        var tbody = document.getElementById('usuarios-tbody');
+                        usuarios.forEach(function(usuario) {
+                            var tr = document.createElement('tr');
+                            var tdId = document.createElement('td');
+                            tdId.textContent = usuario.id;
+                            var tdNome = document.createElement('td');
+                            tdNome.textContent = usuario.nome;
+                            var tdEmail = document.createElement('td');
+                            tdEmail.textContent = usuario.email;
+                            tr.appendChild(tdId);
+                            tr.appendChild(tdNome);
+                            tr.appendChild(tdEmail);
+                            tbody.appendChild(tr);
+                        });
+                    } else {
+                        console.error('Failed to fetch usuarios.json', xhr.status, xhr.statusText);
+                    }
                 }
             };
             xhr.send();

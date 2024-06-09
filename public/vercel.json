@@ -1,0 +1,8 @@
+{
+  "routes": [
+    {
+      "src": "/usuarios",
+      "dest": "/usuarios.html"
+    }
+  ]
+}
